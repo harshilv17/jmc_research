@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  /* brand palette (from moodboard) */
+  --color-char: #141312;
+  --color-char-soft: #1c1a18;
+  --color-teal: #163f3b;
+  --color-teal-deep: #0e2c29;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #d9be84;
+  --color-ivory: #f3ede1;
+  --color-oxblood: #5a1b1c;
+  --color-muted: #9b968c;
+
+  /* fonts (wired in layout via next/font) */
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-jost);
+  --font-cinzel: var(--font-cinzel);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-char);
+}
+
+body {
+  background: var(--color-char);
+  color: var(--color-ivory);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-char);
+}
+
+/* scroll-reveal (toggled by IntersectionObserver in <Reveal/>) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* thin gold rule */
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-gold) 60%, transparent),
+    transparent
+  );
+}
