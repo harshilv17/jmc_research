@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JATIN MALIK COUTURE — Brand Moodboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#163F3B; --teal-deep:#0E2C29; --gold:#C9A24B; --gold-soft:#D9BE84;
+    --ivory:#F3EDE1; --oxblood:#5A1B1C; --olive:#4A4E3A; --rust:#A65A2E;
+    --earth:#5A4632; --char:#141312;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--char);color:var(--ivory);font-family:'Jost',sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
+  section{padding:90px 0;border-bottom:1px solid rgba(201,162,75,.14)}
+  .eyebrow{font-family:'Jost';letter-spacing:.42em;text-transform:uppercase;font-size:11px;color:var(--gold);margin-bottom:22px}
+  h2{font-family:'Cormorant Garamond';font-weight:400;font-size:42px;letter-spacing:.02em;margin-bottom:14px;color:var(--ivory)}
+  h2 i{color:var(--gold-soft)}
+  .lead{font-family:'Cormorant Garamond';font-size:21px;font-weight:300;color:#cdc7ba;max-width:760px}
+  .note{font-size:13.5px;color:#9b968c;max-width:820px;margin-top:10px}
+
+  /* ===== HERO ===== */
+  .hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(201,162,75,.18)}
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(120% 90% at 78% 18%, rgba(60,110,120,.55), transparent 55%),
+      radial-gradient(140% 120% at 12% 95%, rgba(8,30,30,.95), transparent 60%),
+      linear-gradient(135deg,#0E2C29 0%, #15403D 42%, #1d5560 70%, #0c2326 100%);}
+  .hero-bg::after{content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;
+    background:repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 26px),
+              repeating-linear-gradient(58deg, rgba(0,0,0,.18) 0 1px, transparent 1px 14px);}
+  .hero-inner{position:relative;z-index:2}
+  .mark{width:230px;height:auto;margin:0 auto 6px;display:block}
+  .mark-real{width:330px;height:auto;display:block;margin:0 auto 22px;filter:drop-shadow(0 4px 30px rgba(0,0,0,.35))}
+  .logo-img{width:230px;height:auto}
+  .burst-img{width:120px;height:auto}
+  .wordmark{font-family:'Cinzel';font-weight:500;letter-spacing:.34em;font-size:38px;color:var(--gold);padding-left:.34em}
+  .hero .sub{margin-top:34px;font-family:'Jost';letter-spacing:.46em;font-size:11px;text-transform:uppercase;color:#d6cfc2;border-bottom:1px solid var(--gold);display:inline-block;padding-bottom:8px}
+  .hero .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#7fa6a0;z-index:2}
+
+  /* ===== LOGO SYSTEM ===== */
+  .logos{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:40px}
+  .logo-card{background:var(--teal);border:1px solid rgba(201,162,75,.25);border-radius:4px;min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;padding:30px}
+  .logo-card.ivory{background:var(--ivory)}
+  .logo-card.ink{background:var(--char)}
+  .logo-card .tag{position:absolute;top:14px;left:16px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  .logo-card.ivory .tag{color:var(--earth)}
+  .wm-full{font-family:'Cinzel';font-weight:500;letter-spacing:.3em;font-size:26px;color:var(--gold);padding-left:.3em}
+  .wm-couture{font-family:'Cormorant Garamond';font-weight:400;letter-spacing:.12em;font-size:30px}
+  .ivory .wm-couture{color:var(--teal)}
+  .monogram{font-family:'Cinzel';font-weight:600;letter-spacing:.12em;font-size:54px;color:var(--gold)}
+  .ivory .monogram{color:var(--teal)}
+
+  /* ===== PALETTE ===== */
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px}
+  @media(max-width:900px){.swatches{grid-template-columns:repeat(2,1fr)}}
+  .sw{border-radius:5px;overflow:hidden;background:#1d1b19;border:1px solid rgba(255,255,255,.06)}
+  .sw .chip{height:120px}
+  .sw .meta{padding:16px 16px 20px}
+  .sw .nm{font-family:'Cormorant Garamond';font-size:20px;color:var(--ivory);margin-bottom:2px}
+  .sw .hex{font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+  .sw .why{font-size:12.5px;color:#a39e94;line-height:1.55}
+  .ratio{margin-top:46px;display:flex;height:60px;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+  .ratio span{display:flex;align-items:flex-end;padding:8px 12px;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+
+  /* ===== TYPE ===== */
+  .type-row{display:grid;grid-template-columns:170px 1fr;gap:30px;padding:26px 0;border-top:1px solid rgba(201,162,75,.12);align-items:center}
+  .type-row .label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .type-row .label small{display:block;color:#857f74;letter-spacing:.06em;margin-top:6px;text-transform:none;font-size:11px}
+  .sp-display{font-family:'Cormorant Garamond';font-weight:400;font-size:46px;line-height:1.1;color:var(--ivory)}
+  .sp-title{font-family:'Cinzel';font-weight:500;letter-spacing:.22em;font-size:24px;color:var(--gold-soft)}
+  .sp-body{font-family:'Jost';font-weight:300;font-size:16px;color:#c7c2b8;max-width:620px}
+  .sp-dev{font-family:'Tiro Devanagari Hindi';font-size:30px;color:var(--gold-soft)}
+
+  /* ===== TEXTURE / DETAILS ===== */
+  .tex{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}
+  @media(max-width:900px){.tex{grid-template-columns:repeat(2,1fr)}}
+  .tx{height:200px;border-radius:5px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.07)}
+  .tx .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+  .tx-silk{background:radial-gradient(120% 90% at 75% 20%,rgba(70,120,128,.6),transparent 55%),linear-gradient(135deg,#0E2C29,#1d5560 70%,#0c2326)}
+  .tx-silk::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(118deg,rgba(255,255,255,.06) 0 2px,transparent 2px 24px);mix-blend-mode:overlay}
+  .tx-gold{background:linear-gradient(135deg,#3a2c12,#C9A24B 50%,#7a5d22)}
+  .tx-gold::after{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(0,0,0,.18) 0deg 6deg,transparent 6deg 12deg);opacity:.5}
+  .tx-rays{background:var(--teal-deep);display:flex;align-items:center;justify-content:center}
+  .tx-paint{background:var(--ivory)}
+  .tx-paint::after{content:"";position:absolute;inset:0;background:
+     radial-gradient(circle at 30% 40%,rgba(70,90,140,.35) 0 6px,transparent 7px),
+     radial-gradient(circle at 55% 60%,rgba(160,120,40,.4) 0 5px,transparent 6px),
+     radial-gradient(circle at 70% 35%,rgba(70,90,140,.3) 0 8px,transparent 9px),
+     radial-gradient(circle at 45% 75%,rgba(120,90,30,.35) 0 4px,transparent 5px)}
+  .tx-oxblood{background:radial-gradient(120% 120% at 30% 20%,#7a2a2b,transparent 60%),linear-gradient(160deg,#5A1B1C,#2a0d0d)}
+  .tx-grain{background:linear-gradient(135deg,#2a2723,#4A4E3A 60%,#1a1a16)}
+  .tx-grain::after{content:"";position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:3px 3px}
+
+  /* sunburst svg reused */
+  .voice{margin-top:30px;font-family:'Cormorant Garamond';font-style:italic;font-size:30px;line-height:1.45;color:var(--ivory);max-width:840px}
+  .voice b{color:var(--gold-soft);font-style:normal;font-weight:500}
+  footer{padding:60px 0;text-align:center;color:#6f6a60;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <img class="mark-real" src="/assets/jm-logo-crop.png" alt="Jatin Malik logo">
+    <div class="sub">Where the story begins</div>
+  </div>
+  <div class="cap">Brand Moodboard · Visual Direction · Digital Atelier</div>
+</div>
+
+<!-- ============ ESSENCE ============ -->
+<section><div class="wrap">
+  <div class="eyebrow">The Essence</div>
+  <h2>Not fashion. <i>Tradition.</i></h2>
+  <div class="voice">“Where every hand tells a story, and every piece comes from people who put their heart into it. <b>This isn't just fashion. This is tradition.</b>”</div>
+  <p class="note">Brand voice: bold, founder-led, reverent of craft. Built on a Shiva <i>philosophy</i> — stillness, depth, the five elements — never literal iconography. The site is a slow, cinematic <b>digital atelier</b>, not a catalog.</p>
+</div></section>
+
+<!-- ============ LOGO SYSTEM ============ -->
+<section><div class="wrap">
+  <div class="eyebrow">Logo System</div>
+  <h2>The <i>Mark</i> & its variants</h2>
+  <p class="lead">A rising-sun / radiant burst (divine light, the Shiva element) crowning a high-contrast serif wordmark. Gold on teal is the signature pairing.</p>
+  <div class="logos">
+
+    <div class="logo-card"><span class="tag">Primary lockup · real asset</span>
+      <img class="logo-img" src="/assets/jm-logo-crop.png" alt="Jatin Malik primary lockup">
+    </div>
+
+    <div class="logo-card ivory"><span class="tag">Full wordmark</span>
+      <div class="wm-couture">JATIN&nbsp;MALIK&nbsp;COUTURE</div>
+    </div>
+
+    <div class="logo-card ink"><span class="tag">Sun mark (solo / favicon)</span>
+      <img class="burst-img" src="/assets/jm-burst.png" alt="Jatin Malik sun mark">
+    </div>
+
+    <div class="logo-card"><span class="tag">Monogram</span>
+      <div class="monogram">JM</div>
+    </div>
+
+  </div>
+  <p class="note">Currently the site ships <b>no favicon</b> (audit C1) — the solo sun mark solves that. Variants give flexibility: lockup for hero, wordmark for editorial headers, sun mark for tabs/social/seal, JM monogram for buttons, embroidery labels, loaders.</p>
+</div></section>
+
+<!-- ============ PALETTE ============ -->
+<section><div class="wrap">
+  <div class="eyebrow">Colour Palette</div>
+  <h2>Drawn from the <i>house itself</i></h2>
+  <p class="lead">Every colour is pulled from something the brand already owns — the logo, the flagship buildings, the embroidery, the editorial backdrops. Nothing invented. Dark-mode-first, so gold and teal can glow.</p>
+
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#163F3B"></div><div class="meta">
+      <div class="nm">Deep Teal</div><div class="hex">#163F3B</div>
+      <div class="why">The brand's true colour — logo ground, the teal flagship buildings, the Shiva-philosophy showroom (AD-featured). The identity anchor: calm, regal, the water/depth element.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#C9A24B"></div><div class="meta">
+      <div class="nm">Antique Gold</div><div class="hex">#C9A24B</div>
+      <div class="why">Zardozi thread and the wordmark itself. Carries craft, warmth and the "divine radiance" of the sunburst. The single accent — used sparingly so it stays precious.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#F3EDE1"></div><div class="meta">
+      <div class="nm">Ivory / Buttercream</div><div class="hex">#F3EDE1</div>
+      <div class="why">The raw canvas hand-painters work on; the "buttercream sherwani" of the Vogue wedding. Editorial breathing room — light relief inside a dark experience.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#5A1B1C"></div><div class="meta">
+      <div class="nm">Oxblood</div><div class="hex">#5A1B1C</div>
+      <div class="why">The bandhgalas and BOHO embellishment. Royal, theatrical depth — the colour of ceremony and drama. Used for moments, not surfaces.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#4A4E3A"></div><div class="meta">
+      <div class="nm">Muted Olive</div><div class="hex">#4A4E3A</div>
+      <div class="why">The painterly portrait backdrops (Zayn / ELLE). A quiet editorial neutral that flatters skin and gold — natural section ground.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#A65A2E"></div><div class="meta">
+      <div class="nm">Terracotta Rust</div><div class="hex">#A65A2E</div>
+      <div class="why">The warm "Occasion Edit" backdrop on their own site. Indian-summer warmth — an accent for occasion/festive chapters.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#5A4632"></div><div class="meta">
+      <div class="nm">Earth Brown</div><div class="hex">#5A4632</div>
+      <div class="why">The earthy silk kurtas and androgynous styling. Grounds the palette in handloom and skin — never sterile.</div></div></div>
+
+    <div class="sw"><div class="chip" style="background:#141312"></div><div class="meta">
+      <div class="nm">Charcoal Base</div><div class="hex">#141312</div>
+      <div class="why">The shadow in every reel and the draped-silk hero. The cinematic ground the whole site sits on, so video and gold lead the eye.</div></div></div>
+  </div>
+
+  <div class="ratio">
+    <span style="background:#141312;flex:5">Charcoal 50%</span>
+    <span style="background:#163F3B;flex:3">Teal 30%</span>
+    <span style="background:#F3EDE1;flex:1;color:#333">Ivory 10%</span>
+    <span style="background:#C9A24B;flex:.6;color:#3a2c12">Gold 6%</span>
+    <span style="background:#5A1B1C;flex:.4">Oxblood 4%</span>
+  </div>
+  <p class="note">Suggested working ratio — a dark, teal-grounded canvas; ivory for editorial passages; gold + oxblood strictly as accents.</p>
+</div></section>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<section><div class="wrap">
+  <div class="eyebrow">Typography</div>
+  <h2>A <i>couture serif</i>, kept quiet</h2>
+  <p class="lead">The feed sits beside Vogue and AD mastheads — the type should hold that register. (Web stand-ins shown; license the brand's true serif for production.)</p>
+
+  <div class="type-row"><div class="label">Display serif<small>Cormorant Garamond → e.g. Canela / Ogg</small></div>
+    <div class="sp-display">Where the story begins</div></div>
+
+  <div class="type-row"><div class="label">Title caps<small>TRAJAN — confirmed: the logo is set in Trajan (Cinzel shown as web stand-in)</small></div>
+    <div class="sp-title">THE OCCASION EDIT</div></div>
+
+  <div class="type-row"><div class="label">Body / UI<small>Jost → quiet humanist sans</small></div>
+    <div class="sp-body">Handcrafted traditional-contemporary couture. Every hand tells a story; every piece is made by people who put their heart into it.</div></div>
+
+  <div class="type-row"><div class="label">Heritage accent<small>Devanagari — art, not body</small></div>
+    <div class="sp-dev">जतिन मलिक</div></div>
+
+  <p class="note" style="margin-top:34px">
+    <b style="color:var(--gold)">Production spec —</b>
+    <b style="color:#cdc7ba">Caps / logo = Trajan</b> ·
+    <b style="color:#cdc7ba">Display serif = Cormorant</b> (stand-in for a licensed face e.g. Canela / Ogg) ·
+    <b style="color:#cdc7ba">Body = Jost</b> ·
+    <b style="color:#cdc7ba">Heritage accent = Tiro Devanagari</b> (sparingly, as art).
+  </p>
+</div></section>
+
+<!-- ============ TEXTURE & DETAILS ============ -->
+<section><div class="wrap">
+  <div class="eyebrow">Texture & Background Details</div>
+  <h2>The <i>small things</i> that carry the mood</h2>
+  <p class="lead">Recurring surface elements pulled from the brand's own imagery — these become section grounds, dividers, hovers and loaders.</p>
+
+  <div class="tex">
+    <div class="tx tx-silk"><div class="cap">Draped teal silk — hero ground</div></div>
+    <div class="tx tx-gold"><div class="cap">Zardozi gold weave — accent fields</div></div>
+    <div class="tx tx-rays">
+      <img class="burst-img" src="/assets/jm-burst.png" alt="sunburst motif" style="width:140px">
+      <div class="cap">Sunburst — dividers / loader</div></div>
+    <div class="tx tx-paint"><div class="cap" style="color:#3a2c12;background:linear-gradient(transparent,rgba(243,237,225,.85))">Hand-paint floral on ivory</div></div>
+    <div class="tx tx-oxblood"><div class="cap">Oxblood velvet — ceremony depth</div></div>
+    <div class="tx tx-grain"><div class="cap">35mm grain — cinematic overlay</div></div>
+  </div>
+  <p class="note">Motifs to develop into a real asset kit: the radiant sun-burst (logo DNA), paisley & floral hand-paint linework, mandala / sacred-geometry for transitions, rudraksh-bead curves (the showroom's Shiva cue), zardozi gold thread, and a soft film grain over all video.</p>
+</div></section>
+
+<!-- ============ PHOTOGRAPHY ============ -->
+<section><div class="wrap">
+  <div class="eyebrow">Photography Direction</div>
+  <h2>Cinematic, <i>tactile</i>, regal</h2>
+  <p class="lead">Low-key dramatic light · painterly muted backdrops · single regal subject · macro craft close-ups · grainy slow film. Warm and dark — opulent, never neon. <b>(Real hi-res imagery to be dropped in once masters are supplied.)</b></p>
+</div></section>
+
+<footer>Jatin Malik Couture · Visual Moodboard v1 · self-contained mock — colours &amp; logo are live, photography is descriptive</footer>
+
+</body>
+</html>

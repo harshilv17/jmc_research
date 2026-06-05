@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JMC — Landing Page Image Set</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+ :root{--teal:#163F3B;--gold:#C9A24B;--ivory:#F3EDE1;--char:#141312}
+ *{margin:0;box-sizing:border-box}
+ body{background:var(--char);color:var(--ivory);font-family:'Jost',sans-serif;font-weight:300}
+ .wrap{max-width:1180px;margin:0 auto;padding:40px 40px 80px}
+ .eyebrow{letter-spacing:.4em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+ h1{font-family:'Cormorant Garamond';font-weight:400;font-size:40px;margin:8px 0 2px}
+ h1 i{color:var(--gold)}
+ .sub{color:#9b968c;font-size:13.5px;max-width:760px;margin-top:6px}
+ .hero{margin:34px 0;border:1px solid rgba(201,162,75,.25);border-radius:6px;overflow:hidden;position:relative}
+ .hero video{width:100%;height:440px;object-fit:cover;display:block;background:#000}
+ .hero .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(8,30,30,.25),rgba(8,30,30,.55))}
+ .hero img.logo{width:230px;filter:drop-shadow(0 4px 24px rgba(0,0,0,.4))}
+ .hero .role{position:absolute;top:12px;left:14px;background:rgba(20,19,18,.8);color:var(--gold);font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:5px 10px;border-radius:3px}
+ .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+ @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+ figure{margin:0;border:1px solid rgba(201,162,75,.18);border-radius:6px;overflow:hidden;background:#1d1b19;position:relative}
+ figure img{width:100%;height:330px;object-fit:cover;display:block}
+ .role2{position:absolute;top:10px;left:10px;background:rgba(20,19,18,.82);color:var(--gold);font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:4px 8px;border-radius:3px}
+ figcaption{padding:11px 12px}
+ figcaption b{font-family:'Cormorant Garamond';font-size:17px;color:var(--ivory);font-weight:400;display:block}
+ figcaption span{font-size:11.5px;color:#9b968c}
+ .big{grid-column:span 2}
+ .big img{height:330px}
+ h2{font-family:'Cormorant Garamond';font-weight:400;font-size:24px;margin:48px 0 16px;color:var(--ivory)}
+ h2 i{color:var(--gold)}
+</style></head><body><div class="wrap">
+ <div class="eyebrow">Landing Page · Final Image Set</div>
+ <h1>The <i>dark, essential</i> nine</h1>
+ <p class="sub">Curated from all 65 assets for one goal: a single landing page that makes the brand identity unmistakable. Dark, cinematic, teal+gold, craft-led. Each tagged with its proposed role.</p>
+
+ <div class="hero">
+   <span class="role">01 · Hero (motion)</span>
+   <video src="assets/landing/01-hero-video.mp4" autoplay muted loop playsinline></video>
+   <div class="ov"><img class="logo" src="assets/jm-logo-crop.png" alt="logo"></div>
+ </div>
+ <p class="sub" style="margin-top:-18px">↑ Draped teal silk loop + gold logo + “Where the story begins”. Abstract, luxe, sets mood before product.</p>
+
+ <h2>Signature looks — <i>the identity</i></h2>
+ <div class="grid">
+   <figure><span class="role2">02 · Hero portrait (alt)</span><img src="assets/landing/02-hero-portrait.jpg"><figcaption><b>Embellished sherwani · teal</b><span>Dark, dramatic side-light on brand teal. Swap-in human hero.</span></figcaption></figure>
+   <figure><span class="role2">03 · Signature</span><img src="assets/landing/03-signature-neelkaal.jpg"><figcaption><b>Neel Kaal</b><span>Blue-black bandhgala — name + tone read pure “Mahadev”.</span></figcaption></figure>
+   <figure><span class="role2">04 · Signature</span><img src="assets/landing/04-signature-poster.jpg"><figcaption><b>Poster Blazer</b><span>Darkest, most cinematic frame in the whole library.</span></figcaption></figure>
+   <figure><span class="role2">05 · Tailoring</span><img src="assets/landing/05-tailoring-tux.jpg"><figcaption><b>Brick by Brick Tux</b><span>Ivory on pure black — high-contrast craftsmanship.</span></figcaption></figure>
+ </div>
+
+ <h2>Colour, echo & <i>essence</i></h2>
+ <div class="grid">
+   <figure><span class="role2">06 · Brand teal</span><img src="assets/landing/06-brandteal-kurta.jpg"><figcaption><b>Teal Kurta Set</b><span>Locks the signature teal into an actual garment.</span></figcaption></figure>
+   <figure><span class="role2">07 · Silk echo</span><img src="assets/landing/07-silkecho-nehru.jpg"><figcaption><b>Blue Organza Nehru</b><span>Model on draped teal silk — mirrors the hero video.</span></figcaption></figure>
+   <figure><span class="role2">08 · Essence / craft</span><img src="assets/landing/08-essence-atelier.jpg"><figcaption><b>The Atelier (Hermetic)</b><span>Dark hands-at-work — proof of couture + the Shiva idea.</span></figcaption></figure>
+   <figure><span class="role2">09 · Detail</span><img src="assets/landing/09-detail-kalgi.jpg"><figcaption><b>Kalgi · gold on black</b><span>Macro luxury accent — gold glints on darkness.</span></figcaption></figure>
+ </div>
+</div></body></html>
