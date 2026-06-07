@@ -41,10 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 # project
-.DS_Store
 *.log
 /tmp/
-assets/site/video/*.mp4
 
 # local research / strategy (not for client repo)
 research/
