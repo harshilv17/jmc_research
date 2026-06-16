@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Reveal from "./Reveal";
 
 type Status = "idle" | "sending" | "done" | "error";
@@ -11,6 +11,13 @@ const field =
 export default function Inquiry() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [piece, setPiece] = useState("");
+
+  // Prefill when arriving from a product page (/?piece=...#inquire).
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get("piece");
+    if (p) setPiece(p);
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -79,6 +86,14 @@ export default function Inquiry() {
               className="hidden"
               aria-hidden
             />
+            {/* piece context from a product page */}
+            <input type="hidden" name="piece" value={piece} />
+            {piece && (
+              <p className="sm:col-span-2 -mb-2 text-[12px] text-ivory/70">
+                Enquiring about{" "}
+                <span className="font-accent text-gold-soft">{piece}</span>.
+              </p>
+            )}
 
             <label className="block">
               <span className="text-[10px] uppercase tracking-[0.22em] text-muted">
@@ -128,8 +143,10 @@ export default function Inquiry() {
                 A few words <span className="normal-case">(optional)</span>
               </span>
               <textarea
+                key={piece}
                 name="message"
                 rows={3}
+                defaultValue={piece ? `I'm interested in ${piece}. ` : ""}
                 className={`${field} resize-none`}
                 placeholder="Tell us about your day…"
               />

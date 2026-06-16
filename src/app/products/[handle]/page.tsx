@@ -115,7 +115,10 @@ export default async function ProductPage({ params }: Params) {
           </dl>
 
           <div className="mt-9 flex flex-wrap gap-4">
-            <Button href="/#inquire" variant="solid">
+            <Button
+              href={`/?piece=${encodeURIComponent(product.title)}#inquire`}
+              variant="solid"
+            >
               Enquire about this piece
             </Button>
             <Button href="/appointments">Book a consultation</Button>

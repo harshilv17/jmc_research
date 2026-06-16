@@ -53,15 +53,22 @@ export default function Header() {
 
         {/* desktop nav */}
         <nav className="hidden items-center gap-9 md:flex">
-          {primaryNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-[11px] uppercase tracking-[0.22em] text-ivory/75 transition-colors hover:text-gold"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {primaryNav.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`text-[11px] uppercase tracking-[0.22em] transition-colors hover:text-gold ${
+                  active ? "text-gold" : "text-ivory/75"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <Link
             href="/#inquire"
             className="rounded-full border border-gold/50 px-5 py-1.5 text-xs uppercase tracking-[0.22em] text-gold-soft transition-colors hover:bg-gold hover:text-char"

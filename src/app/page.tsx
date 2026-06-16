@@ -3,6 +3,7 @@ import Manifesto from "@/components/Manifesto";
 import Essence from "@/components/Essence";
 import Signature from "@/components/Signature";
 import Craft from "@/components/Craft";
+import CollectionsPreview from "@/components/CollectionsPreview";
 import Inquiry from "@/components/Inquiry";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Essence />
       <Signature />
       <Craft />
+      <CollectionsPreview />
       <Inquiry />
     </main>
   );

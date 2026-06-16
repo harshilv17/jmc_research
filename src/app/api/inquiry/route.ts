@@ -9,6 +9,8 @@ type Payload = {
   occasion?: string;
   eventDate?: string;
   message?: string;
+  /** product the enquiry originated from, if any */
+  piece?: string;
   /** honeypot — must stay empty */
   company?: string;
 };
@@ -48,6 +50,7 @@ export async function POST(req: Request) {
     occasion: body.occasion?.trim() ?? "",
     eventDate: body.eventDate?.trim() ?? "",
     message: body.message?.trim() ?? "",
+    piece: body.piece?.trim() ?? "",
     at: new Date().toISOString(),
   };
 

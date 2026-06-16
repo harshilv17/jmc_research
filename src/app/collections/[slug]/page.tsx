@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import PageIntro from "@/components/ui/PageIntro";
-import ProductCard from "@/components/ProductCard";
+import CollectionGrid from "@/components/CollectionGrid";
 import {
   activeCollections,
   collectionProducts,
@@ -40,15 +40,7 @@ export default async function CollectionPage({ params }: Params) {
       />
 
       <Container className="pb-28">
-        <p className="mb-10 text-center text-[11px] uppercase tracking-[0.25em] text-muted">
-          {items.length} pieces · Made to order
-        </p>
-
-        <div className="grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-3">
-          {items.map((p) => (
-            <ProductCard key={p.handle} product={p} />
-          ))}
-        </div>
+        <CollectionGrid products={items} />
 
         <div className="mt-20 text-center">
           <Link
