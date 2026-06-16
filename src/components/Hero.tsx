@@ -33,6 +33,8 @@ export default function Hero() {
           width={760}
           height={460}
           priority
+          fetchPriority="high"
+          sizes="(min-width: 768px) 340px, (min-width: 640px) 300px, 230px"
           className="w-[230px] drop-shadow-[0_4px_30px_rgba(0,0,0,0.45)] sm:w-[300px] md:w-[340px]"
         />
         <p className="mt-8 text-[10px] font-light uppercase tracking-[0.5em] text-ivory/80 sm:text-xs">
