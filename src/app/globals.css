@@ -13,9 +13,9 @@
   --color-muted: #9b968c;
 
   /* fonts (wired in layout via next/font) */
-  --font-serif: var(--font-cormorant);
-  --font-sans: var(--font-jost);
-  --font-cinzel: var(--font-cinzel);
+  --font-sans: var(--font-bricolage);
+  --font-serif: var(--font-bricolage);
+  --font-accent: var(--font-sinistre);
 }
 
 html {

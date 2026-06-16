@@ -23,7 +23,7 @@ export default function Signature() {
           </Reveal>
           <Reveal delay={80}>
             <h2 className="mt-5 font-serif text-3xl font-light text-ivory sm:text-5xl">
-              An art of <span className="text-gold-soft italic">presence</span>.
+              An art of <span className="text-gold-soft font-accent">presence</span>.
             </h2>
           </Reveal>
         </div>

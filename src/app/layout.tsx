@@ -1,27 +1,24 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost, Cinzel } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const jost = Jost({
-  variable: "--font-jost",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+// Sinistre — Collletttivo, OFL (src/app/fonts/Sinistre-LICENSE.txt)
+const sinistre = localFont({
+  variable: "--font-sinistre",
   display: "swap",
-});
-
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
+  src: [
+    { path: "./fonts/Sinistre-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Sinistre-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/Sinistre-Dark.woff2", weight: "900", style: "normal" },
+  ],
 });
 
 const SITE = "https://jatinmalikcouture.com";
@@ -60,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${jost.variable} ${cinzel.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${sinistre.variable} h-full antialiased`}
     >
       <body
         suppressHydrationWarning

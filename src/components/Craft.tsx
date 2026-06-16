@@ -30,7 +30,7 @@ export default function Craft() {
           </Reveal>
           <Reveal delay={80}>
             <h2 className="mt-5 font-serif text-3xl font-light leading-tight text-ivory sm:text-5xl">
-              Made to your <span className="text-gold-soft italic">measure</span>.
+              Made to your <span className="text-gold-soft font-accent">measure</span>.
             </h2>
           </Reveal>
           <Reveal delay={140}>

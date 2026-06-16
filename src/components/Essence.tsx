@@ -31,7 +31,7 @@ export default function Essence() {
           </Reveal>
           <Reveal delay={80}>
             <h2 className="mt-5 font-serif text-3xl font-light leading-tight text-ivory sm:text-5xl">
-              Built on a <span className="text-gold-soft italic">philosophy</span>,
+              Built on a <span className="text-gold-soft font-accent">philosophy</span>,
               not a pattern.
             </h2>
           </Reveal>

@@ -49,7 +49,7 @@ export default function Inquiry() {
         </Reveal>
         <Reveal delay={80}>
           <h2 className="mt-5 font-serif text-3xl font-light text-ivory sm:text-5xl">
-            Book a couture <span className="text-gold-soft italic">appointment</span>
+            Book a couture <span className="text-gold-soft font-accent">appointment</span>
           </h2>
         </Reveal>
         <Reveal delay={140}>

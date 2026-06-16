@@ -16,7 +16,7 @@ export default function Manifesto() {
         <h2 className="mt-7 font-serif text-4xl font-light leading-[1.1] text-ivory sm:text-6xl">
           Not fashion.
           <br />
-          <span className="text-gold-soft italic">Tradition.</span>
+          <span className="text-gold-soft font-accent">Tradition.</span>
         </h2>
       </Reveal>
 
