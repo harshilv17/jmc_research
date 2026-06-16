@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -63,7 +65,9 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full bg-char text-ivory"
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
