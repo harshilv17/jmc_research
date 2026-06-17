@@ -3,13 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   transpilePackages: ["@jmc/core"],
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.shopify.com",
-        pathname: "/s/files/**",
-      },
-    ],
+    // Catalog images are admin-managed external URLs for now. Until we add
+    // owned image storage + a custom loader, accept any https host.
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 };
 

@@ -2,61 +2,36 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-type Payload = {
-  name?: string;
-  email?: string;
-  phone?: string;
-  occasion?: string;
-  eventDate?: string;
-  message?: string;
-  /** product the enquiry originated from, if any */
-  piece?: string;
-  /** honeypot — must stay empty */
-  company?: string;
-};
+const API_URL = process.env.API_URL ?? "http://localhost:4000/v1";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+/** Thin proxy: forwards storefront inquiries to the standalone API. */
 export async function POST(req: Request) {
-  let body: Payload;
+  let body: unknown;
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
 
-  // bot trap
-  if (body.company) {
-    return NextResponse.json({ ok: true });
-  }
-
-  const name = body.name?.trim() ?? "";
-  const email = body.email?.trim() ?? "";
-
-  if (name.length < 2) {
-    return NextResponse.json({ ok: false, error: "Please enter your name." }, { status: 422 });
-  }
-  if (!EMAIL_RE.test(email)) {
+  try {
+    const res = await fetch(`${API_URL}/inquiries`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      return NextResponse.json(
+        { ok: false, error: "Could not send your enquiry. Please try again." },
+        { status: 502 },
+      );
+    }
+    return NextResponse.json({ ok: true, ...json });
+  } catch {
     return NextResponse.json(
-      { ok: false, error: "Please enter a valid email." },
-      { status: 422 },
+      { ok: false, error: "Could not reach the atelier. Please try again." },
+      { status: 502 },
     );
   }
-
-  const inquiry = {
-    name,
-    email,
-    phone: body.phone?.trim() ?? "",
-    occasion: body.occasion?.trim() ?? "",
-    eventDate: body.eventDate?.trim() ?? "",
-    message: body.message?.trim() ?? "",
-    piece: body.piece?.trim() ?? "",
-    at: new Date().toISOString(),
-  };
-
-  // TODO: wire to a delivery channel once provided (Resend / Formspree / CRM).
-  // For now we record the inquiry server-side so nothing is lost.
-  console.info("[inquiry]", inquiry);
-
-  return NextResponse.json({ ok: true });
 }

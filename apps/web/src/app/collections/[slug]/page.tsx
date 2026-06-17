@@ -4,32 +4,23 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import PageIntro from "@/components/ui/PageIntro";
 import CollectionGrid from "@/components/CollectionGrid";
-import {
-  activeCollections,
-  collectionProducts,
-  getCollection,
-} from "@/content/collections";
+import { getCollection } from "@/lib/catalog";
+
+export const dynamic = "force-dynamic";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return activeCollections().map((c) => ({ slug: c.slug }));
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const c = getCollection(slug);
+  const c = await getCollection(slug);
   if (!c) return {};
   return { title: c.title, description: c.description };
 }
 
 export default async function CollectionPage({ params }: Params) {
   const { slug } = await params;
-  const collection = getCollection(slug);
+  const collection = await getCollection(slug);
   if (!collection) notFound();
-
-  const items = collectionProducts(collection);
-  if (items.length === 0) notFound();
 
   return (
     <main>
@@ -40,7 +31,13 @@ export default async function CollectionPage({ params }: Params) {
       />
 
       <Container className="pb-28">
-        <CollectionGrid products={items} />
+        {collection.products.length === 0 ? (
+          <p className="text-center text-sm text-muted">
+            Pieces for this line are coming soon.
+          </p>
+        ) : (
+          <CollectionGrid products={collection.products} />
+        )}
 
         <div className="mt-20 text-center">
           <Link

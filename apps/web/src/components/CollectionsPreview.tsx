@@ -3,21 +3,16 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import Container from "./ui/Container";
 import Button from "./ui/Button";
-import { activeCollections, collectionProducts } from "@/content/collections";
+import { getCollections } from "@/lib/catalog";
 
-export default function CollectionsPreview() {
-  // Lead with the cornerstone lines.
-  const featured = activeCollections()
-    .filter((c) =>
-      ["sherwanis", "bandhgalas", "tuxedos"].includes(c.slug),
-    )
-    .slice(0, 3);
+export default async function CollectionsPreview() {
+  const featured = (await getCollections()).slice(0, 3);
+
+  // Nothing to show yet — keep the home page clean until pieces exist.
+  if (featured.length === 0) return null;
 
   return (
-    <section
-      id="collections"
-      className="w-full scroll-mt-24 py-20 sm:py-28"
-    >
+    <section id="collections" className="w-full scroll-mt-24 py-20 sm:py-28">
       <Container>
         <div className="text-center">
           <Reveal>
@@ -35,7 +30,7 @@ export default function CollectionsPreview() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {featured.map((c, i) => {
-            const cover = c.hero ?? collectionProducts(c)[0]?.media[0]?.src;
+            const cover = c.products[0]?.images[0]?.src;
             return (
               <Reveal key={c.slug} delay={i * 90}>
                 <Link

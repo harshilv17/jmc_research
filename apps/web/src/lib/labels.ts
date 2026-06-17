@@ -1,4 +1,4 @@
-import type { Category } from "@/content/types";
+import type { Category } from "@jmc/core";
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   sherwani: "Sherwani",

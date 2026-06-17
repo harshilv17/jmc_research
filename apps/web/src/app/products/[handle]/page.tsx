@@ -6,53 +6,47 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import ProductCard from "@/components/ProductCard";
 import { CATEGORY_LABELS } from "@/lib/labels";
-import { getCollection } from "@/content/collections";
-import { getProduct, products, relatedProducts } from "@/content/products";
+import {
+  CATEGORY_META,
+  getProduct,
+  getRelated,
+  categoryToSlug,
+} from "@/lib/catalog";
+
+export const dynamic = "force-dynamic";
 
 type Params = { params: Promise<{ handle: string }> };
 
-// Pre-render the full catalog at build time.
-export function generateStaticParams() {
-  return products.map((p) => ({ handle: p.handle }));
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { handle } = await params;
-  const p = getProduct(handle);
+  const p = await getProduct(handle);
   if (!p) return {};
   return {
     title: p.title,
     description: `${p.title} — ${CATEGORY_LABELS[p.category]}, made to order by Jatin Malik Couture.`,
-    openGraph: { images: p.media[0] ? [p.media[0].src] : undefined },
+    openGraph: { images: p.images[0] ? [p.images[0].src] : undefined },
   };
 }
 
-const collectionForCategory: Record<string, string> = {
-  sherwani: "sherwanis",
-  bandhgala: "bandhgalas",
-  tuxedo: "tuxedos",
-  kurta: "kurta-sets",
-  jacket: "jackets",
-  footwear: "footwear",
-  accessories: "accessories",
-  "couture-set": "couture-sets",
-};
-
 export default async function ProductPage({ params }: Params) {
   const { handle } = await params;
-  const product = getProduct(handle);
+  const product = await getProduct(handle);
   if (!product) notFound();
 
-  const related = relatedProducts(handle);
-  const collectionSlug = collectionForCategory[product.category];
-  const collection = collectionSlug ? getCollection(collectionSlug) : undefined;
+  const related = await getRelated(handle, product.category);
+  const collectionSlug = categoryToSlug(product.category);
+  const collectionTitle = CATEGORY_META[product.category].title;
+  const priced = !product.priceOnRequest && product.basePrice != null;
 
   return (
     <main>
       <Container className="grid grid-cols-1 gap-12 pt-28 pb-24 sm:pt-36 lg:grid-cols-2 lg:gap-16">
         {/* gallery */}
         <div className="flex flex-col gap-4">
-          {product.media.map((m, i) => (
+          {product.images.length === 0 && (
+            <div className="aspect-[3/4] w-full bg-char-soft" />
+          )}
+          {product.images.map((m, i) => (
             <div
               key={m.src}
               className="relative aspect-[3/4] w-full overflow-hidden bg-char-soft"
@@ -75,17 +69,10 @@ export default async function ProductPage({ params }: Params) {
             <Link href="/collections" className="hover:text-gold">
               Collections
             </Link>
-            {collection && (
-              <>
-                {" / "}
-                <Link
-                  href={`/collections/${collection.slug}`}
-                  className="hover:text-gold"
-                >
-                  {collection.title}
-                </Link>
-              </>
-            )}
+            {" / "}
+            <Link href={`/collections/${collectionSlug}`} className="hover:text-gold">
+              {collectionTitle}
+            </Link>
           </nav>
 
           <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-gold">
@@ -98,9 +85,8 @@ export default async function ProductPage({ params }: Params) {
           <div className="rule mt-8 w-full" />
 
           <p className="mt-8 text-sm font-light leading-relaxed text-ivory/75">
-            A made-to-order piece from the atelier of Jatin Malik — cut to your
-            measure and finished by hand. Reach out to begin a private
-            consultation and discuss fabric, fit and timeline for your occasion.
+            {product.description ??
+              "A made-to-order piece from the atelier of Jatin Malik — cut to your measure and finished by hand. Reach out to begin a private consultation and discuss fabric, fit and timeline for your occasion."}
           </p>
 
           <dl className="mt-8 space-y-3 text-sm">
@@ -110,7 +96,11 @@ export default async function ProductPage({ params }: Params) {
             </div>
             <div className="flex justify-between border-b border-gold/10 pb-3">
               <dt className="text-muted">Pricing</dt>
-              <dd className="text-ivory/85">On request</dd>
+              <dd className="text-ivory/85">
+                {priced
+                  ? `${(product.basePrice! / 100).toLocaleString()} ${product.currency}`
+                  : "On request"}
+              </dd>
             </div>
           </dl>
 

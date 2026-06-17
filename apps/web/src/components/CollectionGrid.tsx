@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Product } from "@/content/types";
+import type { CatalogProduct } from "@/lib/catalog";
 import ProductCard from "./ProductCard";
 
 type Sort = "featured" | "az" | "za";
@@ -14,7 +14,11 @@ const SORTS: { value: Sort; label: string }[] = [
   { value: "za", label: "Z – A" },
 ];
 
-export default function CollectionGrid({ products }: { products: Product[] }) {
+export default function CollectionGrid({
+  products,
+}: {
+  products: CatalogProduct[];
+}) {
   const [sort, setSort] = useState<Sort>("featured");
   const [visible, setVisible] = useState(PAGE);
 

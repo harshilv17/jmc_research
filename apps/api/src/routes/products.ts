@@ -1,21 +1,26 @@
-import { asc, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { getDb, schema } from "@jmc/db";
 import {
   productInputSchema,
   productUpdateSchema,
   productImageInputSchema,
+  productStatusSchema,
 } from "@jmc/core";
 
 export const products = new Hono();
 
-// List products.
+// List products (with images), optionally filtered by status.
 products.get("/", async (c) => {
   const db = getDb();
-  const rows = await db
-    .select()
-    .from(schema.products)
-    .orderBy(asc(schema.products.title));
+  const status = productStatusSchema.safeParse(c.req.query("status"));
+  const rows = await db.query.products.findMany({
+    where: status.success
+      ? eq(schema.products.status, status.data)
+      : undefined,
+    with: { images: { orderBy: (i, { asc: a }) => a(i.position) } },
+    orderBy: (p, { asc: a }) => a(p.title),
+  });
   return c.json({ products: rows });
 });
 

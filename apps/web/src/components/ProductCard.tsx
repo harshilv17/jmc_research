@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/content/types";
+import type { CatalogProduct } from "@/lib/catalog";
 import { CATEGORY_LABELS } from "@/lib/labels";
 
-const CARD_SIZES =
-  "(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw";
+const CARD_SIZES = "(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw";
 
-export default function ProductCard({ product }: { product: Product }) {
-  const [primary, secondary] = product.media;
+export default function ProductCard({ product }: { product: CatalogProduct }) {
+  const [primary, secondary] = product.images;
 
   return (
     <Link href={`/products/${product.handle}`} className="group block">
@@ -42,7 +41,9 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.title}
         </h3>
         <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-muted">
-          Made to order
+          {product.priceOnRequest || product.basePrice == null
+            ? "Made to order"
+            : `${(product.basePrice / 100).toLocaleString()} ${product.currency}`}
         </p>
       </div>
     </Link>
