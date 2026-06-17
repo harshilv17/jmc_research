@@ -1,54 +1,66 @@
-const modules = [
-  { name: "Products", desc: "Create & manage the catalogue", status: "planned" },
-  { name: "Collections", desc: "Group products into lines", status: "planned" },
-  { name: "Inventory", desc: "Stock, reservations, locations", status: "planned" },
-  { name: "Orders", desc: "Order & fulfilment pipeline (OMS)", status: "planned" },
-  { name: "Inquiries", desc: "Storefront enquiries / leads", status: "planned" },
-  { name: "Journal", desc: "Editorial content", status: "planned" },
-];
+import Link from "next/link";
+import { api } from "@/lib/api";
+import type { CollectionRow, InquiryRow, ProductRow } from "@/lib/types";
 
-export default function Dashboard() {
+async function counts() {
+  try {
+    const [p, c, i] = await Promise.all([
+      api.get<{ products: ProductRow[] }>("/products"),
+      api.get<{ collections: CollectionRow[] }>("/collections"),
+      api.get<{ inquiries: InquiryRow[] }>("/inquiries"),
+    ]);
+    return {
+      products: p.products.length,
+      collections: c.collections.length,
+      inquiries: i.inquiries.length,
+      error: null as string | null,
+    };
+  } catch (e) {
+    return {
+      products: 0,
+      collections: 0,
+      inquiries: 0,
+      error: e instanceof Error ? e.message : "API unreachable",
+    };
+  }
+}
+
+export const dynamic = "force-dynamic";
+
+export default async function Dashboard() {
+  const c = await counts();
+  const cards = [
+    { href: "/products", label: "Products", n: c.products },
+    { href: "/collections", label: "Collections", n: c.collections },
+    { href: "/inquiries", label: "Inquiries", n: c.inquiries },
+  ];
+
   return (
-    <main style={{ maxWidth: 880, margin: "0 auto", padding: "64px 24px" }}>
-      <p style={{ fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase", color: "#c9a24b" }}>
-        Jatin Malik Couture
-      </p>
-      <h1 style={{ fontSize: 32, fontWeight: 300, marginTop: 8 }}>
-        Admin · OMS
-      </h1>
-      <p style={{ color: "#9b968c", marginTop: 8 }}>
-        In-house content & order management. Modules below are scaffolded and
-        wired to the API as each phase lands.
+    <div>
+      <h1 className="text-2xl font-light">Dashboard</h1>
+      <p className="mt-1 text-sm text-neutral-400">
+        In-house content & order management.
       </p>
 
-      <div
-        style={{
-          marginTop: 40,
-          display: "grid",
-          gap: 16,
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-        }}
-      >
-        {modules.map((m) => (
-          <div
-            key={m.name}
-            style={{
-              border: "1px solid #2a2a2c",
-              borderRadius: 8,
-              padding: 20,
-              background: "#161617",
-            }}
+      {c.error && (
+        <p className="mt-4 rounded-md border border-red-900 bg-red-950/40 px-4 py-3 text-sm text-red-300">
+          API not reachable: {c.error}. Start it with{" "}
+          <code className="text-red-200">pnpm --filter @jmc/api dev</code>.
+        </p>
+      )}
+
+      <div className="mt-8 grid grid-cols-3 gap-4">
+        {cards.map((card) => (
+          <Link
+            key={card.href}
+            href={card.href}
+            className="rounded-lg border border-neutral-800 bg-neutral-900 p-6 hover:border-amber-600"
           >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h2 style={{ fontSize: 18, fontWeight: 500 }}>{m.name}</h2>
-              <span style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.15em", color: "#9b968c" }}>
-                {m.status}
-              </span>
-            </div>
-            <p style={{ color: "#9b968c", fontSize: 14, marginTop: 8 }}>{m.desc}</p>
-          </div>
+            <p className="text-3xl font-light">{card.n}</p>
+            <p className="mt-1 text-sm text-neutral-400">{card.label}</p>
+          </Link>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

@@ -30,6 +30,16 @@ export const productInputSchema = z.object({
 });
 export type ProductInput = z.infer<typeof productInputSchema>;
 
+export const productUpdateSchema = productInputSchema.partial();
+export type ProductUpdate = z.infer<typeof productUpdateSchema>;
+
+export const productImageInputSchema = z.object({
+  url: z.string().url(),
+  alt: z.string().default(""),
+  position: z.number().int().default(0),
+});
+export type ProductImageInput = z.infer<typeof productImageInputSchema>;
+
 export const collectionInputSchema = z.object({
   slug: z
     .string()
@@ -42,6 +52,9 @@ export const collectionInputSchema = z.object({
   published: z.boolean().default(false),
 });
 export type CollectionInput = z.infer<typeof collectionInputSchema>;
+
+export const collectionUpdateSchema = collectionInputSchema.partial();
+export type CollectionUpdate = z.infer<typeof collectionUpdateSchema>;
 
 export const inquiryInputSchema = z.object({
   name: z.string().min(2),
