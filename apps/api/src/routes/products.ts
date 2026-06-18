@@ -39,7 +39,10 @@ products.get("/detail/:id", async (c) => {
     where: eq(schema.products.id, c.req.param("id")),
     with: {
       images: { orderBy: (i, { asc: a }) => a(i.position) },
-      variants: { orderBy: (v, { asc: a }) => a(v.position) },
+      variants: {
+        orderBy: (v, { asc: a }) => a(v.position),
+        with: { inventory: true },
+      },
     },
   });
   if (!product) return c.json({ error: "Not found" }, 404);

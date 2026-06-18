@@ -82,6 +82,33 @@ export async function uploadImage(productId: string, fd: FormData) {
   revalidatePath(`/products/${productId}`);
 }
 
+// ── variants & inventory ────────────────────────────────────────────────────
+export async function createVariant(productId: string, fd: FormData) {
+  await api.post("/variants", {
+    productId,
+    sku: str(fd, "sku"),
+    label: str(fd, "label"),
+    priceDelta: Number(str(fd, "priceDelta") || "0"),
+  });
+  revalidatePath(`/products/${productId}`);
+}
+
+export async function deleteVariant(productId: string, variantId: string) {
+  await api.del(`/variants/${variantId}`);
+  revalidatePath(`/products/${productId}`);
+}
+
+export async function setInventory(
+  productId: string,
+  variantId: string,
+  fd: FormData,
+) {
+  await api.put(`/variants/${variantId}/inventory`, {
+    quantity: Number(str(fd, "quantity") || "0"),
+  });
+  revalidatePath(`/products/${productId}`);
+}
+
 // ── collections ───────────────────────────────────────────────────────────
 function collectionPayload(fd: FormData) {
   return {

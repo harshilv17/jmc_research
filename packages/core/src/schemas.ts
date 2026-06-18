@@ -40,6 +40,24 @@ export const productImageInputSchema = z.object({
 });
 export type ProductImageInput = z.infer<typeof productImageInputSchema>;
 
+export const variantInputSchema = z.object({
+  sku: z.string().min(1),
+  label: z.string().min(1),
+  priceDelta: z.number().int().default(0),
+  position: z.number().int().default(0),
+});
+export type VariantInput = z.infer<typeof variantInputSchema>;
+
+export const variantUpdateSchema = variantInputSchema.partial();
+export type VariantUpdate = z.infer<typeof variantUpdateSchema>;
+
+export const inventoryUpdateSchema = z.object({
+  quantity: z.number().int().nonnegative(),
+  reserved: z.number().int().nonnegative().default(0),
+  location: z.string().default("atelier"),
+});
+export type InventoryUpdate = z.infer<typeof inventoryUpdateSchema>;
+
 export const collectionInputSchema = z.object({
   slug: z
     .string()

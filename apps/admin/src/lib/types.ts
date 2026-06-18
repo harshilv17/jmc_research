@@ -20,9 +20,17 @@ export type ProductImageRow = {
   position: number;
 };
 
+export type VariantRow = {
+  id: string;
+  sku: string;
+  label: string;
+  priceDelta: number;
+  inventory: { quantity: number; reserved: number }[];
+};
+
 export type ProductDetail = ProductRow & {
   images: ProductImageRow[];
-  variants: { id: string; sku: string; label: string }[];
+  variants: VariantRow[];
 };
 
 export type CollectionRow = {

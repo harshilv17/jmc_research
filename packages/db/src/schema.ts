@@ -227,6 +227,13 @@ export const variantsRelations = relations(variants, ({ one, many }) => ({
   inventory: many(inventory),
 }));
 
+export const inventoryRelations = relations(inventory, ({ one }) => ({
+  variant: one(variants, {
+    fields: [inventory.variantId],
+    references: [variants.id],
+  }),
+}));
+
 export const collectionsRelations = relations(collections, ({ many }) => ({
   products: many(productCollections),
 }));

@@ -5,8 +5,11 @@ import { Button, Field, inputCls } from "@/components/ui";
 import { api } from "@/lib/api";
 import {
   addImage,
+  createVariant,
   deleteImage,
   deleteProduct,
+  deleteVariant,
+  setInventory,
   updateProduct,
   uploadImage,
 } from "@/lib/actions";
@@ -108,6 +111,80 @@ export default async function EditProductPage({
             <Button>Add</Button>
           </form>
         </details>
+      </section>
+
+      {/* variants & inventory */}
+      <section className="mt-12">
+        <h2 className="text-lg font-light">Variants &amp; stock</h2>
+        <table className="mt-4 w-full text-left text-sm">
+          <thead className="border-b border-neutral-800 text-xs uppercase tracking-wider text-neutral-500">
+            <tr>
+              <th className="py-2">SKU</th>
+              <th className="py-2">Label</th>
+              <th className="py-2">Price Δ</th>
+              <th className="py-2">Stock</th>
+              <th className="py-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {product.variants.map((v) => (
+              <tr key={v.id} className="border-b border-neutral-900">
+                <td className="py-2 text-neutral-300">{v.sku}</td>
+                <td className="py-2 text-neutral-300">{v.label}</td>
+                <td className="py-2 text-neutral-400">
+                  {v.priceDelta ? (v.priceDelta / 100).toLocaleString() : "—"}
+                </td>
+                <td className="py-2">
+                  <form
+                    action={setInventory.bind(null, product.id, v.id)}
+                    className="flex items-center gap-2"
+                  >
+                    <input
+                      name="quantity"
+                      type="number"
+                      min="0"
+                      defaultValue={v.inventory[0]?.quantity ?? 0}
+                      className="w-20 rounded-md border border-neutral-700 bg-neutral-900 px-2 py-1 text-sm"
+                    />
+                    <button className="text-xs text-amber-400 hover:text-amber-300">
+                      Set
+                    </button>
+                  </form>
+                </td>
+                <td className="py-2 text-right">
+                  <form action={deleteVariant.bind(null, product.id, v.id)}>
+                    <button className="text-xs text-red-400 hover:text-red-300">
+                      Remove
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            ))}
+            {product.variants.length === 0 && (
+              <tr>
+                <td colSpan={5} className="py-3 text-sm text-neutral-500">
+                  No variants yet.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+
+        <form
+          action={createVariant.bind(null, product.id)}
+          className="mt-6 grid max-w-2xl grid-cols-[1fr_1fr_1fr_auto] items-end gap-3"
+        >
+          <Field label="SKU">
+            <input name="sku" required className={inputCls} />
+          </Field>
+          <Field label="Label" hint="e.g. 40 / Ivory">
+            <input name="label" required className={inputCls} />
+          </Field>
+          <Field label="Price Δ (paise)">
+            <input name="priceDelta" type="number" defaultValue={0} className={inputCls} />
+          </Field>
+          <Button>Add variant</Button>
+        </form>
       </section>
     </div>
   );

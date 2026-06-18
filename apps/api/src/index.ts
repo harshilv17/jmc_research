@@ -4,6 +4,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { products } from "./routes/products";
+import { variants } from "./routes/variants";
 import { collections } from "./routes/collections";
 import { inquiries } from "./routes/inquiries";
 import { auth } from "./routes/auth";
@@ -29,6 +30,7 @@ app.use("/uploads/*", serveStatic({ root: "./" }));
 const api = app.basePath("/v1");
 api.route("/auth", auth);
 api.route("/products", products);
+api.route("/variants", variants);
 api.route("/collections", collections);
 api.route("/inquiries", inquiries);
 
