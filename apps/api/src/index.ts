@@ -1,4 +1,5 @@
 import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
@@ -21,6 +22,9 @@ app.use(
 );
 
 app.get("/health", (c) => c.json({ ok: true, service: "jmc-api" }));
+
+// Serve uploaded media from ./uploads.
+app.use("/uploads/*", serveStatic({ root: "./" }));
 
 const api = app.basePath("/v1");
 api.route("/auth", auth);

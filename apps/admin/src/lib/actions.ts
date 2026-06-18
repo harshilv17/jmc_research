@@ -64,6 +64,24 @@ export async function deleteImage(productId: string, imageId: string) {
   revalidatePath(`/products/${productId}`);
 }
 
+const API_BASE = process.env.API_URL ?? "http://localhost:4000/v1";
+
+export async function uploadImage(productId: string, fd: FormData) {
+  const file = fd.get("file");
+  if (!(file instanceof File) || file.size === 0) return;
+
+  const out = new FormData();
+  out.append("file", file);
+  out.append("alt", str(fd, "alt"));
+
+  const res = await fetch(`${API_BASE}/products/${productId}/images/upload`, {
+    method: "POST",
+    body: out,
+  });
+  if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+  revalidatePath(`/products/${productId}`);
+}
+
 // ── collections ───────────────────────────────────────────────────────────
 function collectionPayload(fd: FormData) {
   return {

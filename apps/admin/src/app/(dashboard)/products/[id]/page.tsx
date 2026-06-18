@@ -8,6 +8,7 @@ import {
   deleteImage,
   deleteProduct,
   updateProduct,
+  uploadImage,
 } from "@/lib/actions";
 import type { ProductDetail } from "@/lib/types";
 
@@ -78,14 +79,35 @@ export default async function EditProductPage({
         </div>
 
         <form
-          action={addImage.bind(null, product.id)}
+          action={uploadImage.bind(null, product.id)}
           className="mt-6 grid max-w-xl grid-cols-[1fr_auto] items-end gap-3"
         >
-          <Field label="Image URL">
-            <input name="url" type="url" required className={inputCls} />
+          <Field label="Upload image" hint="JPEG / PNG / WebP / AVIF, max 8 MB">
+            <input
+              name="file"
+              type="file"
+              accept="image/*"
+              required
+              className="block w-full text-sm text-neutral-300 file:mr-3 file:rounded-md file:border-0 file:bg-neutral-800 file:px-3 file:py-2 file:text-neutral-200"
+            />
           </Field>
-          <Button>Add image</Button>
+          <Button>Upload</Button>
         </form>
+
+        <details className="mt-4 max-w-xl">
+          <summary className="cursor-pointer text-xs text-neutral-500">
+            …or add by URL
+          </summary>
+          <form
+            action={addImage.bind(null, product.id)}
+            className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3"
+          >
+            <Field label="Image URL">
+              <input name="url" type="url" required className={inputCls} />
+            </Field>
+            <Button>Add</Button>
+          </form>
+        </details>
       </section>
     </div>
   );

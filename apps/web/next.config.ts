@@ -3,9 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   transpilePackages: ["@jmc/core"],
   images: {
-    // Catalog images are admin-managed external URLs for now. Until we add
-    // owned image storage + a custom loader, accept any https host.
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
+    // Catalog images: owned uploads served by the API (http in dev) plus any
+    // https host while external URLs are still allowed.
+    remotePatterns: [
+      { protocol: "https", hostname: "**" },
+      { protocol: "http", hostname: "localhost" },
+    ],
   },
 };
 

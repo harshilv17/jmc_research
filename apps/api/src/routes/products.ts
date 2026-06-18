@@ -1,3 +1,6 @@
+import { randomUUID } from "node:crypto";
+import { mkdir, unlink, writeFile } from "node:fs/promises";
+import { extname, join } from "node:path";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { getDb, schema } from "@jmc/db";
@@ -9,6 +12,11 @@ import {
 } from "@jmc/core";
 
 export const products = new Hono();
+
+const UPLOAD_DIR = join(process.cwd(), "uploads");
+const PUBLIC_URL = process.env.API_PUBLIC_URL ?? "http://localhost:4000";
+const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/avif"]);
+const MAX_BYTES = 8 * 1024 * 1024; // 8 MB
 
 // List products (with images), optionally filtered by status.
 products.get("/", async (c) => {
@@ -104,11 +112,51 @@ products.post("/:id/images", async (c) => {
   return c.json({ image }, 201);
 });
 
-// Remove an image.
+// Upload an image file for a product (multipart, field "file").
+products.post("/:id/images/upload", async (c) => {
+  const productId = c.req.param("id");
+  const body = await c.req.parseBody();
+  const file = body.file;
+  if (!(file instanceof File)) {
+    return c.json({ error: "No file provided" }, 422);
+  }
+  if (!ALLOWED.has(file.type)) {
+    return c.json({ error: "Unsupported image type" }, 422);
+  }
+  if (file.size > MAX_BYTES) {
+    return c.json({ error: "File too large (max 8 MB)" }, 422);
+  }
+
+  await mkdir(UPLOAD_DIR, { recursive: true });
+  const ext = extname(file.name) || `.${file.type.split("/")[1]}`;
+  const filename = `${randomUUID()}${ext}`;
+  const buffer = Buffer.from(await file.arrayBuffer());
+  await writeFile(join(UPLOAD_DIR, filename), buffer);
+
+  const db = getDb();
+  const [image] = await db
+    .insert(schema.productImages)
+    .values({
+      productId,
+      url: `${PUBLIC_URL}/uploads/${filename}`,
+      alt: typeof body.alt === "string" ? body.alt : "",
+      position: 0,
+    })
+    .returning();
+  return c.json({ image }, 201);
+});
+
+// Remove an image (and its local file, if owned).
 products.delete("/images/:imageId", async (c) => {
   const db = getDb();
-  await db
+  const [removed] = await db
     .delete(schema.productImages)
-    .where(eq(schema.productImages.id, c.req.param("imageId")));
+    .where(eq(schema.productImages.id, c.req.param("imageId")))
+    .returning();
+
+  if (removed?.url.startsWith(`${PUBLIC_URL}/uploads/`)) {
+    const filename = removed.url.split("/uploads/")[1];
+    await unlink(join(UPLOAD_DIR, filename)).catch(() => {});
+  }
   return c.json({ ok: true });
 });
