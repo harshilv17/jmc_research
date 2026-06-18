@@ -5,6 +5,7 @@ import { logger } from "hono/logger";
 import { products } from "./routes/products";
 import { collections } from "./routes/collections";
 import { inquiries } from "./routes/inquiries";
+import { auth } from "./routes/auth";
 
 const app = new Hono();
 
@@ -22,6 +23,7 @@ app.use(
 app.get("/health", (c) => c.json({ ok: true, service: "jmc-api" }));
 
 const api = app.basePath("/v1");
+api.route("/auth", auth);
 api.route("/products", products);
 api.route("/collections", collections);
 api.route("/inquiries", inquiries);

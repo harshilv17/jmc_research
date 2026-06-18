@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "dotenv -e ../../.env -- tsx watch src/index.ts",
     "start": "dotenv -e ../../.env -- tsx src/index.ts",
+    "seed:admin": "dotenv -e ../../.env -- tsx src/seed-admin.ts",
     "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src"
@@ -15,7 +16,8 @@
     "@jmc/core": "workspace:*",
     "@jmc/db": "workspace:*",
     "drizzle-orm": "^0.38.3",
-    "hono": "^4.6.14"
+    "hono": "^4.6.14",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^20",
